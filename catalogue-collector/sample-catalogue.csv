@@ -1,0 +1,4 @@
+﻿supplier,product,sku,price,currency,availability,product_url,source_url,collected_utc
+Demo supplier — fictional,Safety gloves (sample),DEMO-001,450.00,PKR,InStock,https://example.com/demo,https://example.com/demo,2026-10-05T09:07:10+00:00
+Demo supplier — fictional,Storage bin (sample),DEMO-002,1250.00,PKR,InStock,https://example.com/demo,https://example.com/demo,2026-10-05T09:07:10+00:00
+Demo supplier — fictional,Packing tape (sample),DEMO-003,190.00,PKR,OutOfStock,https://example.com/demo,https://example.com/demo,2026-10-05T09:07:10+00:00
