@@ -18,7 +18,9 @@ class App:
         self.stop = threading.Event()
         self.busy = False
         root.title(f'Supplier Catalogue Collector {VERSION} | Muhammad Naveed')
-        root.geometry('1100x720')
+        width = min(1100, max(800, root.winfo_screenwidth() - 80))
+        height = min(760, max(580, root.winfo_screenheight() - 140))
+        root.geometry(f'{width}x{height}+20+20')
         root.minsize(800, 580)
         style = ttk.Style(root)
         style.theme_use('clam')
@@ -71,10 +73,10 @@ class App:
         table_frame.columnconfigure(0, weight=1)
         self.table.bind('<Double-1>', self.open_source)
         self.status = tk.StringVar(value='Ready. Try the offline demo or collect the live practice catalogue.')
-        ttk.Label(frame, textvariable=self.status, wraplength=1000).pack(anchor='w', pady=(12, 6))
+        ttk.Label(frame, textvariable=self.status, wraplength=width - 70).pack(anchor='w', pady=(12, 6))
         self.log = tk.Text(frame, height=3, state='disabled', font=('Segoe UI', 9), wrap='word')
         self.log.pack(fill='x')
-        ttk.Label(frame, text='Double-click a row to open its source. Missing fields remain blank. Listed prices are not supplier quotations.', wraplength=1000).pack(anchor='w', pady=(8, 0))
+        ttk.Label(frame, text='Double-click a row to open its source. Missing fields remain blank. Listed prices are not supplier quotations.', wraplength=width - 70).pack(anchor='w', pady=(8, 0))
         root.after(100, self.poll)
         root.protocol('WM_DELETE_WINDOW', self.close)
 
