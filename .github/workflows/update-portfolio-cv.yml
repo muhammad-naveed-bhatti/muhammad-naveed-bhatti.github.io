@@ -1,0 +1,34 @@
+name: Update Portfolio CV
+
+on:
+  push:
+    paths:
+      - ".cv-update-trigger"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-cv:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download current CV PDF
+        env:
+          CV_URL: 'https://sdmntprwestus.oaiusercontent.com/files/00000000-3cf4-8230-a721-61edd43addf9/raw?se=2026-10-06T09%3A12%3A43Z&sp=r&sv=2026-02-06&sr=b&scid=76466398-f5fe-5202-9e7a-f33649e85e46&skoid=0765b554-4b90-4fa2-9d6d-0055a2427910&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-06T01%3A45%3A04Z&ske=2026-10-07T01%3A45%3A04Z&sks=b&skv=2026-02-06&sig=tCjBgwC52F4L7FXlLEYkhITU7YrE32mpSL9kDF5ZBq8%3D'
+        run: |
+          curl -fL "$CV_URL" -o Muhammad_Naveed_CV.pdf
+          test -s Muhammad_Naveed_CV.pdf
+      - name: Commit updated CV
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Muhammad_Naveed_CV.pdf
+          if git diff --cached --quiet; then
+            echo "CV already current"
+          else
+            git commit -m "Update portfolio downloadable CV"
+            git push
+          fi
